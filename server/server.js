@@ -114,6 +114,70 @@ app.post('/gamification/sync', authenticate, async (req, res) => {
     res.json({ success: true });
 });
 
+// --- Admin Route (Simple Database Viewer) ---
+app.get('/admin/view', async (req, res) => {
+    // Simple security: Require a secret query param
+    const { key } = req.query;
+    if (key !== 'admin123') { // Access via /admin/view?key=admin123
+        return res.status(403).send('<h1>Access Denied</h1>');
+    }
+
+    try {
+        const users = await User.findAll();
+        const todos = await Todo.findAll({ include: User }); // Include user data for context
+
+        let html = `
+            <html>
+            <head>
+                <style>
+                    body { font-family: sans-serif; padding: 20px; background: #121212; color: #fff; }
+                    table { border-collapse: collapse; width: 100%; margin-bottom: 40px; }
+                    th, td { border: 1px solid #444; padding: 8px; text-align: left; }
+                    th { background-color: #333; }
+                    h1, h2 { color: #8e2de2; }
+                    .tag { font-size: 0.8em; padding: 2px 6px; border-radius: 4px; background: #333; }
+                </style>
+            </head>
+            <body>
+                <h1>🔐 LockedIn Admin Dashboard</h1>
+                
+                <h2>👥 Users (${users.length})</h2>
+                <table>
+                    <tr><th>ID</th><th>Username</th><th>Level</th><th>XP</th><th>Joined</th></tr>
+                    ${users.map(u => `
+                        <tr>
+                            <td>${u.id}</td>
+                            <td>${u.username}</td>
+                            <td>${u.level}</td>
+                            <td>${u.xp}</td>
+                            <td>${new Date(u.createdAt).toLocaleString()}</td>
+                        </tr>
+                    `).join('')}
+                </table>
+
+                <h2>📝 Tasks (${todos.length})</h2>
+                <table>
+                    <tr><th>ID</th><th>User</th><th>Task</th><th>Category</th><th>Done?</th><th>Reminder</th></tr>
+                    ${todos.map(t => `
+                        <tr>
+                            <td>${t.id}</td>
+                            <td>${t.User ? t.User.username : 'Unknown'}</td>
+                            <td>${t.text}</td>
+                            <td><span class="tag">${t.category}</span></td>
+                            <td>${t.completed ? '✅' : '❌'}</td>
+                            <td>${t.reminderTime ? new Date(t.reminderTime).toLocaleString() : '-'}</td>
+                        </tr>
+                    `).join('')}
+                </table>
+            </body>
+            </html>
+        `;
+        res.send(html);
+    } catch (err) {
+        res.status(500).send('Error fetching data');
+    }
+});
+
 // Start Server
 sequelize.sync({ force: false }).then(() => {
     console.log('Database synced');
