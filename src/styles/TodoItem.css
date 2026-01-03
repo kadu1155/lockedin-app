@@ -1,0 +1,217 @@
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-sm);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.todo-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.todo-item.completed {
+    opacity: 0.7;
+    background: #f9f9fa;
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: var(--color-text-secondary);
+}
+
+.checkbox-container {
+    position: relative;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    margin-right: var(--spacing-md);
+    flex-shrink: 0;
+}
+
+.checkbox-container input {
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: transparent;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+}
+
+.checkbox-container:hover input~.checkmark {
+    border-color: var(--color-accent);
+}
+
+.checkbox-container input:checked~.checkmark {
+    background-color: var(--color-success);
+    border-color: var(--color-success);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked~.checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 8px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.content {
+    flex-grow: 1;
+    margin-right: var(--spacing-md);
+    min-width: 0;
+    /* Fix flex text overflow */
+}
+
+.text-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.category-badge {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--color-bg);
+    color: var(--color-text-secondary);
+}
+
+/* Category Colors */
+.category-badge.work {
+    background: rgba(0, 113, 227, 0.1);
+    color: #0071e3;
+}
+
+.category-badge.personal {
+    background: rgba(52, 199, 89, 0.1);
+    color: #34c759;
+}
+
+.category-badge.health {
+    background: rgba(255, 59, 48, 0.1);
+    color: #ff3b30;
+}
+
+.category-badge.shopping {
+    background: rgba(255, 149, 0, 0.1);
+    color: #ff9500;
+}
+
+.category-badge.other {
+    background: rgba(142, 142, 147, 0.1);
+    color: #8e8e93;
+}
+
+.todo-text {
+    font-size: 1rem;
+    word-break: break-word;
+    cursor: text;
+    line-height: 1.4;
+}
+
+.todo-time {
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    background: rgba(0, 113, 227, 0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.edit-input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 4px;
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: inherit;
+}
+
+.actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.todo-item:hover .actions,
+.todo-item:focus-within .actions {
+    opacity: 1;
+}
+
+.icon-button {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.icon-button:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--color-text-primary);
+}
+
+.delete-btn:hover {
+    color: var(--color-danger);
+    background: rgba(255, 59, 48, 0.1);
+}
+
+.edit-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .todo-item.completed {
+    background: #252527;
+}

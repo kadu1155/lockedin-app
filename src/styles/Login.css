@@ -1,0 +1,239 @@
+.landing-page {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--color-bg);
+    overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* Beautiful abstract background */
+    background:
+        radial-gradient(circle at 10% 20%, rgba(0, 113, 227, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
+        url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+}
+
+/* Overlay to ensure text is readable */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.85);
+    /* Light mode overlay */
+    backdrop-filter: blur(5px);
+    z-index: 1;
+}
+
+body.dark-mode .hero-section::before {
+    background: rgba(0, 0, 0, 0.7);
+    /* Dark mode overlay */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.hero-text-container {
+    flex: 1;
+    min-width: 300px;
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-primary);
+}
+
+.brand-highlight {
+    background: linear-gradient(135deg, var(--color-accent) 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.feature-pills {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.feature-pills span {
+    background: var(--color-surface);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+}
+
+.login-card-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    min-width: 300px;
+    animation: slideInRight 0.8s ease-out;
+}
+
+/* Reusing core login card styles but refining slightly */
+.login-card {
+    background: var(--color-surface);
+    padding: 2.5rem;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    border: 1px solid var(--color-border);
+}
+
+.login-logo {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.login-header h2 {
+    margin: 0 0 0.5rem 0;
+    color: var(--color-text-primary);
+}
+
+.login-header p {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* About Section */
+.about-section {
+    padding: 6rem 2rem;
+    background: var(--color-surface);
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    color: var(--color-text-primary);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+}
+
+.feature-card {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-bg);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+    border: 1px solid var(--color-border);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+}
+
+.feature-card p {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+/* Footer */
+.landing-footer {
+    padding: 2rem;
+    text-align: center;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 6rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .login-card-container {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .feature-pills {
+        justify-content: center;
+    }
+}

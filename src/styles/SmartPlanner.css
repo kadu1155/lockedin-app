@@ -1,0 +1,111 @@
+.smart-planner {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.8) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: var(--shadow-glass);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ai-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-accent);
+}
+
+.ai-icon {
+    font-size: 1.5rem;
+}
+
+.productivity-tip {
+    background: rgba(0, 113, 227, 0.1);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.plan-section {
+    margin-bottom: var(--spacing-lg);
+}
+
+.plan-section h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.mood-reasoning {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.time-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.time-block {
+    background: rgba(255, 255, 255, 0.6);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+}
+
+.time-block h5 {
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.9rem;
+}
+
+.time-block ul {
+    list-style: none;
+    padding: 0;
+}
+
+.time-block li {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    opacity: 0.9;
+}
+
+.empty-slot {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+.break-suggestion {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* Dark mode overrides */
+body.dark-mode .smart-planner {
+    background: linear-gradient(135deg, rgba(44, 44, 46, 0.5) 0%, rgba(44, 44, 46, 0.8) 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .time-block {
+    background: rgba(0, 0, 0, 0.2);
+}
