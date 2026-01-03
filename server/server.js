@@ -7,11 +7,15 @@ const User = require('./models/User');
 const Todo = require('./models/Todo');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const SECRET_KEY = 'lockedin-secret-key-change-this'; // In prod use env var
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: '*', // Allow all origins (finest for now, or restrict to frontend URL later)
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // Associations
